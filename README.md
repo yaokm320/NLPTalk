@@ -1,2 +1,2 @@
 # NLP-talk
-基于seq2seq的对话模型
+基于seq2seq attention的对话模型
