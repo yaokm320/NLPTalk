@@ -6,8 +6,11 @@ import numpy as np
 
 
 class PreProcess(object):
-    def __init__(self, file_path, max_length=25, samples_num=300, is_char=False, random_choose=False,
-                 filter_max_lenght=False):
+    """
+    数据预处理类
+    """
+    def __init__(self, file_path, max_length=25, samples_num=300, is_char=False,
+                 random_choose=False, filter_max_lenght=False):
         """
         :param file_path:
         :param max_length 语句的最大长度

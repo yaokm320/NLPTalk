@@ -1,19 +1,19 @@
 from flask import Flask, request, Response, json
 from seq2seq_model.encoder_decoder import encoder_model, decoder_model, inference
-from pre_process import PreProcess
+from util.pre_process import PreProcess
 from tensorflow.keras.layers import Input
 
+'''
+特别注意：
 
-# 参数与数据存储路径
-encoder_weights_path = './models/encoder.h5'
-decoder_weights_path = './models/decoder.h5'
-data_path = './data/qingyun.tsv'
+在pycharm里面右键运行带有flask的python程序会默认去bin目录下执行，这会导致代码中相对路径失败
 
-# 定义参数
-embedding_dim = 50
-units = 256
+因此，请不要在pycharm里面右键运行当前server.py程序
 
-process = PreProcess(data_path)
+请在bash里面运行server.py程序
+
+'''
+app = Flask(__name__)
 
 
 def get_response(sentence):
@@ -31,9 +31,6 @@ def get_response(sentence):
     return result.replace(' ', ''), sentence
 
 
-
-app = Flask(__name__)
-
 @app.route('/talk', methods=['POST', 'GET'])
 def talk():
     content = request.args.get('content')
@@ -42,4 +39,14 @@ def talk():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8888, debug=False)
+
+    # 参数与数据存储路径
+    encoder_weights_path = './models/encoder.h5'
+    decoder_weights_path = './models/decoder.h5'
+    data_path = './data/qingyun.tsv'
+    # 定义参数
+    embedding_dim = 50
+    units = 256
+    process = PreProcess(data_path)
+
+    app.run(host="127.0.0.1", port=8000, debug=False)
