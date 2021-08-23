@@ -72,6 +72,7 @@ class PreProcess(object):
 
     def _parse_file(self, file_path, save_path):
         with open(file_path, 'r', encoding='utf-8') as f:
+            # 主要是把一些停用词去掉
             lines = self._purify(f.readlines())
             data = [line.split('\t') for line in lines]
             if self.is_char:
